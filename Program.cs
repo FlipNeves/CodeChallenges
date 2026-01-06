@@ -2,4 +2,4 @@
 using CodeWars;
 
 Console.WriteLine("Hello, Challenge War!");
-Console.WriteLine(ChallengesMethods.DirReduc(["NORTH", "EAST", "WEST", "SOUTH"]).Length);
+Console.WriteLine(ChallengesMethods.ParseInt("five million nine hundred seventy-nine thousand two hundred ninety-four"));
