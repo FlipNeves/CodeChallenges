@@ -2,4 +2,4 @@
 using CodeWars;
 
 Console.WriteLine("Hello, Challenge War!");
-Console.WriteLine(ChallengesMethods.ParseInt("five million nine hundred seventy-nine thousand two hundred ninety-four"));
+Console.WriteLine(ChallengesMethods.IpsBetween("10.0.0.0", "10.0.1.0"));
