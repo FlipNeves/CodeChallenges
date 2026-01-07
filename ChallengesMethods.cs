@@ -31,7 +31,6 @@
             }
             return $"{horas}:{minutos}:{segundos}";
         }
-
         public static string GetReadableTime2(int seconds)
         {
             var horas = 0;
@@ -245,6 +244,50 @@ All tested numbers are valid, you don't need to validate them*/
             }
             return total + current;
         }
+
+
+        /*Implement a function that receives two IPv4 addresses, and returns the number of addresses between them (including the first one, excluding the last one).
+
+All inputs will be valid IPv4 addresses in the form of strings. The last address will always be greater than the first one.
+
+Examples
+* With input "10.0.0.0", "10.0.0.50"  => return   50 
+* With input "10.0.0.0", "10.0.1.0"   => return  256 
+* With input "20.0.0.10", "20.0.1.0"  => return  246*/
+        //public static long IpsBetween(string start, string end)
+        //{
+        //    long IpToLong(string ip)
+        //    {
+        //        var segments = ip.Split('.').Select(byte.Parse).ToArray();
+        //        long result = 0;
+        //        for (int i = 0; i < segments.Length; i++)
+        //        {
+        //            result = (result << 8) + segments[i];
+        //        }
+        //        return result;
+        //    }
+        //    return IpToLong(end) - IpToLong(start);
+        //}
+
+        public static long IpsBetween(string start, string end)
+        {
+            var ip = IpToLong(start);
+            var ip2 = IpToLong(end);
+
+            return ip2 - ip;
+
+            static long IpToLong(string ip)
+            {
+                var values = ip.Split('.').Select(int.Parse).ToArray();
+                var ipLong = 0L;
+                for (int pos = 0; pos < values.Length; pos++)
+                {
+                    ipLong = (ipLong << 8) + values[pos];
+                }
+                return ipLong;
+            }
+        }
+
 
     }
 }
