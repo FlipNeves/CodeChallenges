@@ -2,5 +2,8 @@
 using CodeWars;
 using Interval = System.ValueTuple<int, int>;
 
+var _LeetCodeMethods = new LeetCodeMethods();
+
 Console.WriteLine("Hello, Challenge War!");
-Console.WriteLine(ChallengesMethods.SumIntervals(new Interval[] { (1, 4), (7, 10), (3, 5) }));
+var result = _LeetCodeMethods.TwoSum(new int[] { 2, 7, 11, 15 }, 9);
+Console.WriteLine($"[{string.Join(", ", result)}]");
