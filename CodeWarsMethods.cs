@@ -1,7 +1,7 @@
 ﻿
 namespace CodeWars
 {
-    public static class ChallengesMethods
+    public static class CodeWarsMethods
     {
 
 
