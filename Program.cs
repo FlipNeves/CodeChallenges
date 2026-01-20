@@ -1,9 +1,20 @@
-﻿// See https://aka.ms/new-console-template for more information
-using CodeWars;
-using Interval = System.ValueTuple<int, int>;
+﻿using CodeWars;
+using static CodeWars.LeetCodeMethods;
 
 var _LeetCodeMethods = new LeetCodeMethods();
 
 Console.WriteLine("Hello, Challenge War!");
-var result = _LeetCodeMethods.IsPalindrome("A man, a plan, a canal: Panama");
-Console.WriteLine(result);
+var l1 = new ListNode(9);
+
+var l2 = new ListNode(1,
+         new ListNode(9,
+         new ListNode(9,
+         new ListNode(9,
+         new ListNode(9,
+         new ListNode(9,
+         new ListNode(9,
+         new ListNode(9,
+         new ListNode(9,
+         new ListNode(9))))))))));
+
+Console.WriteLine(_LeetCodeMethods.AddTwoNumbers(l1, l2));
