@@ -21,6 +21,7 @@ You can return the answer in any order.*/
             return Array.Empty<int>();
         }
 
+
         /*A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
 
 Given a string s, return true if it is a palindrome, or false otherwise.
@@ -54,6 +55,7 @@ s consists only of printable ASCII characters.*/
             var normalized = new string(s.Where(c => char.IsLetterOrDigit(c)).ToArray()).ToLower();
             return normalized.SequenceEqual(normalized.Reverse().ToArray());
         }
+
 
         /*Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.
 
@@ -94,6 +96,101 @@ s contains only lowercase English letters.*/
                     list.RemoveAt(list.Count - 1);
                 }
             }
+        }
+
+
+        /*You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+        
+Input: l1 = [2,4,3], l2 = [5,6,4]
+Output: [7,0,8]
+Explanation: 342 + 465 = 807.
+Example 2:
+
+Input: l1 = [0], l2 = [0]
+Output: [0]
+Example 3:
+
+Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+Output: [8,9,9,9,0,0,0,1]
+         */
+        public class ListNode
+        {
+            public int val;
+            public ListNode next;
+            public ListNode(int val = 0, ListNode next = null)
+            {
+                this.val = val;
+                this.next = next;
+            }
+        }
+        //It`s valid, but it`s not optimal solution due to Int128 usage.
+        public ListNode AddTwoNumbersBadSolve(ListNode l1, ListNode l2)
+        {
+            var n1 = ParseToReverseIntBadSolve(l1);
+            var n2 = ParseToReverseIntBadSolve(l2);
+
+            Int128 sum = n1 + n2;
+            var sumArray = sum.ToString().Select(c => int.Parse(c.ToString())).Reverse().ToArray();
+
+            ListNode head = null;
+            ListNode current = null;
+
+            foreach (var number in sumArray)
+            {
+                var newNode = new ListNode(number);
+                if (head == null)
+                {
+                    head = newNode;
+                    current = newNode;
+                }
+                else
+                {
+                    current.next = newNode;
+                    current = newNode;
+                }
+            }
+
+            return head;
+        }
+        private static Int128 ParseToReverseIntBadSolve(ListNode listNode)
+        {
+            var values = new List<int>();
+            while (listNode != null)
+            {
+                values.Add(listNode.val);
+                listNode = listNode.next;
+            }
+            values.Reverse();
+            return Int128.Parse(string.Concat(values));
+        }
+
+        public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
+        {
+            var answerNode = new ListNode(0);
+            var current = answerNode;
+            var carry = 0;
+            while (l1 != null || l2 != null)
+            {
+                var n1 = l1?.val ?? 0;
+                var n2 = l2?.val ?? 0;
+
+                var sum = n1 + n2 + carry;
+                var valueToAdd = sum % 10;
+                carry = (sum - valueToAdd) / 10;
+                current.val += valueToAdd;
+
+                l1 = l1?.next;
+                l2 = l2?.next;
+                if (l1 == null && l2 == null && carry == 0)
+                    break;
+
+                current.next = new ListNode(0);
+                current = current.next;
+            }
+
+            return answerNode;
         }
     }
 }
