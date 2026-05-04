@@ -291,12 +291,11 @@ Open brackets must be closed by the same type of brackets.
 Open brackets must be closed in the correct order.
 Every close bracket has a corresponding open bracket of the same type.
         */
-
-        public bool IsValid(string s)
+        public bool IsValid(string simbols)
         {
             Stack<char> stack = new Stack<char>();
 
-            foreach (var simbol in s)
+            foreach (var simbol in simbols)
             {
                 if (simbol == '(' || simbol == '[' || simbol == '{')
                 {
