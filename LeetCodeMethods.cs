@@ -210,7 +210,8 @@ Output: [8,9,9,9,0,0,0,1]
             return 0m;
         }
 
-        
+
+
         /*Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
 Symbol       Value
@@ -233,7 +234,7 @@ Given a roman numeral, convert it to an integer.
 
         public int RomanToInt(string s)
         {
-            var romanMap = new Dictionary<char, int> { {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100}, {'D', 500}, {'M', 1000} };
+            var romanMap = new Dictionary<char, int> { { 'I', 1 }, { 'V', 5 }, { 'X', 10 }, { 'L', 50 }, { 'C', 100 }, { 'D', 500 }, { 'M', 1000 } };
             ReadOnlySpan<char> romanSpan = s.AsSpan();
             var total = 0;
             for (int i = 0; i < romanSpan.Length; i++)
@@ -246,6 +247,39 @@ Given a roman numeral, convert it to an integer.
                     total += currentValue;
             }
             return total;
+        }
+
+
+
+        /* Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+
+ 
+
+Example 1:
+
+Input: strs = ["flower","flow","flight"]
+Output: "fl"
+Example 2:
+
+Input: strs = ["dog","racecar","car"]
+Output: ""
+Explanation: There is no common prefix among the input strings.
+        */
+        public string LongestCommonPrefix(string[] strs)
+        {
+            var longestPrefix = string.Empty;
+
+            for (int i = 0; i < strs[0].Length; i++)
+            {
+                char currentChar = strs[0][i];
+                if (strs.All(s => s.Length > i && s[i] == currentChar))
+                    longestPrefix += currentChar;
+                else
+                    break;
+            }
+            return longestPrefix;
         }
     }
 }
