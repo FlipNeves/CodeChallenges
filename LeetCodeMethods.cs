@@ -1,4 +1,6 @@
-﻿namespace CodeWars
+﻿using System.Globalization;
+
+namespace CodeWars
 {
     public class LeetCodeMethods
     {
@@ -166,12 +168,12 @@ Output: [8,9,9,9,0,0,0,1]
             return Int128.Parse(string.Concat(values));
         }
 
-        public ListNode AddTwoNumbers(ListNode l1, ListNode l2)
+        public ListNode AddTwoNumbers(ListNode l1, ListNode l2) //good solve
         {
             var answerNode = new ListNode(0);
             var current = answerNode;
             var carry = 0;
-            while (l1 != null || l2 != null)
+            while (l1 != null || l2 != null || carry > 0)
             {
                 var n1 = l1?.val ?? 0;
                 var n2 = l2?.val ?? 0;
@@ -179,7 +181,7 @@ Output: [8,9,9,9,0,0,0,1]
                 var sum = n1 + n2 + carry;
                 var valueToAdd = sum % 10;
                 carry = (sum - valueToAdd) / 10;
-                current.val += valueToAdd;
+                current.val = valueToAdd;
 
                 l1 = l1?.next;
                 l2 = l2?.next;
@@ -191,6 +193,59 @@ Output: [8,9,9,9,0,0,0,1]
             }
 
             return answerNode;
+        }
+
+        public decimal ParseBudgetTotalValue(string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                return 0m;
+
+            if (decimal.TryParse(
+                value,
+                NumberStyles.AllowDecimalPoint | NumberStyles.AllowLeadingSign,
+                CultureInfo.InvariantCulture,
+                out var result))
+                return result / 100;
+
+            return 0m;
+        }
+
+        
+        /*Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+
+Symbol       Value
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+For example, 2 is written as II in Roman numeral, just two ones added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
+
+Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+
+I can be placed before V (5) and X (10) to make 4 and 9. 
+X can be placed before L (50) and C (100) to make 40 and 90. 
+C can be placed before D (500) and M (1000) to make 400 and 900.
+Given a roman numeral, convert it to an integer.
+        */
+
+        public int RomanToInt(string s)
+        {
+            var romanMap = new Dictionary<char, int> { {'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100}, {'D', 500}, {'M', 1000} };
+            ReadOnlySpan<char> romanSpan = s.AsSpan();
+            var total = 0;
+            for (int i = 0; i < romanSpan.Length; i++)
+            {
+                var currentValue = romanMap[romanSpan[i]];
+                var nextValue = (i + 1 < romanSpan.Length) ? romanMap[romanSpan[i + 1]] : 0;
+                if (currentValue < nextValue)
+                    total -= currentValue;
+                else
+                    total += currentValue;
+            }
+            return total;
         }
     }
 }
