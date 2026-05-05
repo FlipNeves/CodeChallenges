@@ -294,13 +294,11 @@ Every close bracket has a corresponding open bracket of the same type.
         public bool IsValid(string simbols)
         {
             Stack<char> stack = new Stack<char>();
-
+            
             foreach (var simbol in simbols)
             {
                 if (simbol == '(' || simbol == '[' || simbol == '{')
-                {
                     stack.Push(simbol);
-                }
                 else
                 {
                     if (stack.Count == 0) return false;
@@ -313,6 +311,30 @@ Every close bracket has a corresponding open bracket of the same type.
                 }
             }
             return stack.Count == 0;
+        }
+
+
+        /*Given an integer x, return true if x is a palindrome, and false otherwise.
+         */
+        public bool IsPalindrome(int x)
+        {
+            if (x < 0)
+                return false;
+
+            var format = x.ToString().Reverse();
+            return format.SequenceEqual(x.ToString());
+        }
+
+        public int[] PlusOne(int[] digits)
+        {
+            var num = int.Parse(string.Join("", digits));
+            num++; //core
+            var result = new List<int>();
+            foreach (var number in num.ToString())
+            {
+                result.Add(int.Parse(number.ToString()));
+            }
+            return result.ToArray();
         }
     }
 }
