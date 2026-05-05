@@ -327,14 +327,38 @@ Every close bracket has a corresponding open bracket of the same type.
 
         public int[] PlusOne(int[] digits)
         {
-            var num = int.Parse(string.Join("", digits));
-            num++; //core
-            var result = new List<int>();
-            foreach (var number in num.ToString())
+            var listDigits = digits.ToList();
+            var lastNumber = listDigits[listDigits.Count - 1];
+            var hundred = 0;
+            if (listDigits.Count > 1)
+                hundred = listDigits[listDigits.Count - 2];
+
+            lastNumber++;
+            if (lastNumber > 9)
             {
-                result.Add(int.Parse(number.ToString()));
+                bool substituindo = true;
+                foreach (var number in lastNumber.ToString())
+                {
+                    if (hundred + number > 9 && substituindo)
+                    {
+                        listDigits[listDigits.Count - 2] = int.Parse(number.ToString());
+                        listDigits[listDigits.Count - 1] = 0;
+                        hundred = 0;
+                        substituindo = false;
+                    }
+                    if (substituindo)
+                    {
+                        listDigits[listDigits.Count - 1] = int.Parse(number.ToString());
+                        substituindo = false;
+                    }
+                    else
+                        listDigits.Add(int.Parse(number.ToString()));
+                }
             }
-            return result.ToArray();
+            else
+                listDigits[listDigits.Count - 1] = int.Parse(lastNumber.ToString());
+
+            return listDigits.ToArray();
         }
     }
 }
