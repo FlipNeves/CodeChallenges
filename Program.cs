@@ -4,6 +4,6 @@ using static CodeWars.LeetCodeMethods;
 var _LeetCodeMethods = new LeetCodeMethods();
 
 Console.WriteLine("Hello, Challenge War!");
-var x = "111"; 
-var val = _LeetCodeMethods.IsValid("()");
-Console.WriteLine(val); 
+var x = new int[] {9}; 
+var val = _LeetCodeMethods.PlusOne(x);
+Console.WriteLine(string.Join(",", val)); 
