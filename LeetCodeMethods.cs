@@ -23,6 +23,20 @@ You can return the answer in any order.*/
             return Array.Empty<int>();
         }
 
+        public int[] TwoSum_2(int[] nums, int target) //Worse solve but made by another way, without using additional data structures.
+        {
+            for (int i = 0; i < nums.Length; i++)
+            {
+                var difference = target - nums[i];
+                var index = Array.FindIndex(nums, i + 1, x => x == difference);
+
+                if (index != -1)
+                    return new int[] { i, index };
+            }
+
+            return Array.Empty<int>();
+        }
+
 
         /*A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.
 
@@ -325,40 +339,67 @@ Every close bracket has a corresponding open bracket of the same type.
             return format.SequenceEqual(x.ToString());
         }
 
+        /*You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
+
+Increment the large integer by one and return the resulting array of digits.
+        */
         public int[] PlusOne(int[] digits)
         {
             var listDigits = digits.ToList();
-            var lastNumber = listDigits[listDigits.Count - 1];
-            var hundred = 0;
-            if (listDigits.Count > 1)
-                hundred = listDigits[listDigits.Count - 2];
-
-            lastNumber++;
-            if (lastNumber > 9)
+            for (int i = listDigits.Count; i > 0; i--)
             {
-                bool substituindo = true;
-                foreach (var number in lastNumber.ToString())
+                var digit = listDigits[i];
+                if (digit < 9)
                 {
-                    if (hundred + number > 9 && substituindo)
-                    {
-                        listDigits[listDigits.Count - 2] = int.Parse(number.ToString());
-                        listDigits[listDigits.Count - 1] = 0;
-                        hundred = 0;
-                        substituindo = false;
-                    }
-                    if (substituindo)
-                    {
-                        listDigits[listDigits.Count - 1] = int.Parse(number.ToString());
-                        substituindo = false;
-                    }
-                    else
-                        listDigits.Add(int.Parse(number.ToString()));
+                    listDigits[i] = digit + 1;
+                    return listDigits.ToArray();
                 }
+                else
+                    listDigits[i] = 0;
             }
-            else
-                listDigits[listDigits.Count - 1] = int.Parse(lastNumber.ToString());
 
+            listDigits.Insert(0, 1);
             return listDigits.ToArray();
+        }
+
+        /*You are given the heads of two sorted linked lists list1 and list2.
+
+Merge the two lists into one sorted list. The list should be made by splicing together the nodes of the first two lists.
+
+Return the head of the merged linked list.
+        */
+        /**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     public ListNode(int val=0, ListNode next=null) {
+ *         this.val = val;
+ *         this.next = next;
+ *     }
+ * }
+ */
+        public ListNode MergeTwoLists(ListNode list1, ListNode list2)
+        {
+            ListNode result = new ListNode();
+            ListNode current = result;
+
+            while (list1 != null && list2 != null)
+            {
+                if (list1.val <= list2.val)
+                {
+                    current.next = list1;
+                    list1 = list1.next;
+                }
+                else
+                {
+                    current.next = list2;
+                    list2 = list2.next;
+                }
+                current = current.next;
+            }
+            current.next = list1 ?? list2;
+            return result.next;
         }
     }
 }
