@@ -423,5 +423,28 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
             return actual;
         }
 
+
+        /* Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
+         * */
+        public ListNode DeleteDuplicates(ListNode head)
+        {
+            var clean = new List<int>();
+            ListNode result = new ListNode();
+            var current = result;
+            while (head != null)
+            {
+                if (!clean.Contains(head.val))
+                {
+                    clean.Add(head.val);
+                    current.next = new ListNode(head.val);
+                    current = current.next;
+                }
+                else
+                    head = head.next;
+            }
+
+            return result.next;
+        }
+
     }
 }
