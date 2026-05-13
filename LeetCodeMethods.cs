@@ -401,5 +401,27 @@ Return the head of the merged linked list.
             current.next = list1 ?? list2;
             return result.next;
         }
+
+        /* You are climbing a staircase. It takes n steps to reach the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top? */
+        public int ClimbStairs(int n)
+        {
+            if (n == 1) return 1;
+            if (n == 2) return 2;
+
+            var actual = 2;
+            var last = 1;
+
+            for (int i = 3; i <= n; i++)
+            {
+                var result = last + actual;
+                last = actual;
+                actual = result;
+            }
+
+            return actual;
+        }
+
     }
 }
