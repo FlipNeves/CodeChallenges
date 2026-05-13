@@ -225,7 +225,6 @@ Output: [8,9,9,9,0,0,0,1]
         }
 
 
-
         /*Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
 Symbol       Value
@@ -262,7 +261,6 @@ Given a roman numeral, convert it to an integer.
             }
             return total;
         }
-
 
 
         /* Write a function to find the longest common prefix string amongst an array of strings.
@@ -339,6 +337,7 @@ Every close bracket has a corresponding open bracket of the same type.
             return format.SequenceEqual(x.ToString());
         }
 
+
         /*You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading 0's.
 
 Increment the large integer by one and return the resulting array of digits.
@@ -361,6 +360,7 @@ Increment the large integer by one and return the resulting array of digits.
             listDigits.Insert(0, 1);
             return listDigits.ToArray();
         }
+
 
         /*You are given the heads of two sorted linked lists list1 and list2.
 
@@ -401,6 +401,7 @@ Return the head of the merged linked list.
             current.next = list1 ?? list2;
             return result.next;
         }
+
 
         /* You are climbing a staircase. It takes n steps to reach the top.
 
@@ -445,6 +446,7 @@ Each time you can either climb 1 or 2 steps. In how many distinct ways can you c
 
             return result.next;
         }
+
 
     }
 }
