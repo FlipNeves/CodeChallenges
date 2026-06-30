@@ -4,6 +4,8 @@ using static CodeWars.LeetCodeMethods;
 var _LeetCodeMethods = new LeetCodeMethods();
 
 Console.WriteLine("Hello, Challenge War!");
-var x = new int[] {6, 9, 3}; 
-var val = _LeetCodeMethods.DeleteDuplicates(new ListNode(1, new ListNode(1, new ListNode(3))));
+var x = new TreeNode(1, new TreeNode(2));
+var y = new TreeNode(1, null, new TreeNode(2));
+
+var val = _LeetCodeMethods.IsSameTree(x, y);
 Console.WriteLine(string.Join(",", val)); 
