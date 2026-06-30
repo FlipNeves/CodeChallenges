@@ -453,8 +453,35 @@ You must implement a solution with a linear runtime complexity and use only cons
         public int SingleNumber(int[] nums)
             => nums.GroupBy(static x => x)
             .FirstOrDefault(x => x.Count() == 1)!.Key;
-    
-    
 
+
+        /* Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+
+ */
+        public class TreeNode
+        {
+            public int val;
+            public TreeNode left;
+            public TreeNode right;
+            public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+            {
+                this.val = val;
+                this.left = left;
+                this.right = right;
+            }
+        }
+        public bool IsSameTree(TreeNode p, TreeNode q)
+        {
+            if (p == null && q == null) return true;
+            if (p == null || q == null) return false;
+            if (p.val != q.val) return false;
+            
+            var leftCheck = IsSameTree(p.left, q.left);
+            var rightCheck = IsSameTree(p.right, q.right);
+            
+            return leftCheck && rightCheck;
+        }
     }
 }
