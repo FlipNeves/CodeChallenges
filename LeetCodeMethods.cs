@@ -483,5 +483,20 @@ Two binary trees are considered the same if they are structurally identical, and
             
             return leftCheck && rightCheck;
         }
+
+
+        public int MaxDepth(TreeNode root)
+        {
+            if (root == null) return 0;
+            
+            var maxDepth = 1;
+            int leftMaxDepth = maxDepth, rightMaxDepth = maxDepth;
+            if (root.left != null)
+                leftMaxDepth += MaxDepth(root.left);
+            if (root.right != null)
+                rightMaxDepth += MaxDepth(root.right);
+            
+            return Math.Max(leftMaxDepth, rightMaxDepth);
+        }
     }
 }
