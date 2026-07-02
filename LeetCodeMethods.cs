@@ -484,7 +484,6 @@ Two binary trees are considered the same if they are structurally identical, and
             return leftCheck && rightCheck;
         }
 
-
         public int MaxDepth(TreeNode root)
         {
             if (root == null) return 0;
@@ -513,6 +512,27 @@ Two binary trees are considered the same if they are structurally identical, and
             var right = MinDepth(root.right);
 
             return 1 + Math.Min(left, right);
+        }
+
+
+        /* You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0. */
+        public int MaxProfit(int[] prices)
+        {
+            int maxProfit = 0;
+            int minPrice = int.MaxValue;
+            for (int i = 0; i < prices.Length; i++)
+            {
+                int buyPrice = prices[i];
+                if (buyPrice < minPrice)
+                    minPrice = buyPrice;
+                if (maxProfit < (prices[i] - minPrice))
+                    maxProfit = prices[i] - minPrice;
+            }
+            return maxProfit;
         }
     }
 }
