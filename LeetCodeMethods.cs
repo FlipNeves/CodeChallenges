@@ -534,5 +534,10 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
             }
             return maxProfit;
         }
+
+        /* Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+         * */
+        public bool ContainsDuplicate(int[] nums) 
+            => nums.Distinct().Count() != nums.Count();
     }
 }
