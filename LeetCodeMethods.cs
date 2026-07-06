@@ -539,5 +539,41 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
          * */
         public bool ContainsDuplicate(int[] nums) 
             => nums.Distinct().Count() != nums.Count();
+
+
+        public bool HasPathSum(TreeNode root, int targetSum)
+        {
+            if (root == null) return false;
+            if (root.left == null && root.right == null) return root.val == targetSum;
+
+            int newTargetSum = targetSum - root.val;
+            return HasPathSum(root.left, newTargetSum) || HasPathSum(root.right, newTargetSum);
+        }
+
+        private int SumTree(TreeNode root, int targetSum)
+        {
+            if (root == null) return 0;
+
+            if (root.left == null && root.right == null) return root.val;
+
+            var sumLeft = 0;
+            var sumRight = 0;
+            sumLeft = SumTree(root.left, targetSum);
+            sumRight = SumTree(root.right, targetSum);
+
+            return targetSum - sumLeft == 0 ? sumLeft : sumRight;
+        }
+
+        //public bool HasPathSum(TreeNode root, int targetSum)
+        //{
+        //    if (root == null) return false;
+
+        //    if (root.left == null && root.right == null)
+        //        return root.val == targetSum;
+
+        //    int remainingSum = targetSum - root.val;
+
+        //    return HasPathSum(root.left, remainingSum) || HasPathSum(root.right, remainingSum);
+        //}
     }
 }
