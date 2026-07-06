@@ -541,6 +541,9 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
             => nums.Distinct().Count() != nums.Count();
 
 
+        /* Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
+
+A leaf is a node with no children. */
         public bool HasPathSum(TreeNode root, int targetSum)
         {
             if (root == null) return false;
@@ -549,31 +552,5 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
             int newTargetSum = targetSum - root.val;
             return HasPathSum(root.left, newTargetSum) || HasPathSum(root.right, newTargetSum);
         }
-
-        private int SumTree(TreeNode root, int targetSum)
-        {
-            if (root == null) return 0;
-
-            if (root.left == null && root.right == null) return root.val;
-
-            var sumLeft = 0;
-            var sumRight = 0;
-            sumLeft = SumTree(root.left, targetSum);
-            sumRight = SumTree(root.right, targetSum);
-
-            return targetSum - sumLeft == 0 ? sumLeft : sumRight;
-        }
-
-        //public bool HasPathSum(TreeNode root, int targetSum)
-        //{
-        //    if (root == null) return false;
-
-        //    if (root.left == null && root.right == null)
-        //        return root.val == targetSum;
-
-        //    int remainingSum = targetSum - root.val;
-
-        //    return HasPathSum(root.left, remainingSum) || HasPathSum(root.right, remainingSum);
-        //}
     }
 }
