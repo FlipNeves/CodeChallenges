@@ -552,5 +552,25 @@ A leaf is a node with no children. */
             int newTargetSum = targetSum - root.val;
             return HasPathSum(root.left, newTargetSum) || HasPathSum(root.right, newTargetSum);
         }
+
+
+        public int MajorityElement_DailyUse(int[] nums)
+            => nums == null ? 0 : nums.ToList().GroupBy(x => x).First(x => x.Count() > (nums.Count() / 2)).Key;
+
+        public int MajorityElement_Faster(int[] nums)
+        {
+            int candidate = 0, count = 0;
+            foreach (int x in nums)
+            {
+                if (count == 0)
+                    candidate = x;
+
+                if (candidate == x)
+                    count++;
+                else
+                    count--;
+            }
+            return candidate;
+        }
     }
 }
