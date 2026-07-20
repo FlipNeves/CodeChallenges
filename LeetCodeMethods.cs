@@ -575,5 +575,24 @@ The majority element is the element that appears more than ⌊n / 2⌋ times. Yo
             }
             return candidate;
         }
+
+
+        /*Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+         * */
+        public int MissingNumber(int[] nums)
+        {
+            var numsList = nums.ToList().OrderBy(x => x).ToArray();
+            var value = numsList[0];
+            if (value != 0)
+                return 0;
+
+            for (int i = 0; i < numsList.LastOrDefault(); i++)
+            {
+                if (value != numsList[i])
+                    return value;
+                value++;
+            }
+            return value + 1;
+        }
     }
 }
