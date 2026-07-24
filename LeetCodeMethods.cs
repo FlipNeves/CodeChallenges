@@ -581,18 +581,37 @@ The majority element is the element that appears more than ⌊n / 2⌋ times. Yo
          * */
         public int MissingNumber(int[] nums)
         {
-            var numsList = nums.ToList().OrderBy(x => x).ToArray();
-            var value = numsList[0];
-            if (value != 0)
-                return 0;
-
-            for (int i = 0; i < numsList.LastOrDefault(); i++)
+            var sum = nums.Sum();
+            var space = nums.Count();
+            int expect = 0;
+            for(var i = 0; i < space; i++)
             {
-                if (value != numsList[i])
-                    return value;
-                value++;
+                expect = expect + i;
             }
-            return value + 1;
+            return sum - expect;
+        }
+
+
+        /* Given a string s, find the length of the longest substring without duplicate characters.
+        */
+        public int LengthOfLongestSubstring(string s)
+        {
+            int longest = 0;
+            var current = string.Empty;
+            foreach (var letter in s)
+            {
+                int index = current.IndexOf(letter);
+                if (index < 0)
+                    current += letter;
+                else
+                {
+                    if (current.Length > longest)
+                        longest = current.Length;
+
+                    current = current[(index + 1)..] + letter;
+                }
+            }
+            return Math.Max(longest, current.Length);
         }
     }
 }
