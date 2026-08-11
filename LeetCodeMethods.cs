@@ -581,14 +581,13 @@ The majority element is the element that appears more than ⌊n / 2⌋ times. Yo
          * */
         public int MissingNumber(int[] nums)
         {
-            var sum = nums.Sum();
-            var space = nums.Count();
-            int expect = 0;
-            for(var i = 0; i < space; i++)
-            {
-                expect = expect + i;
-            }
-            return sum - expect;
+            int space = nums.Length;
+            int expectedSum = 0;
+            for (int i = 0; i <= space; i++)
+                expectedSum += i;
+
+            int actualSum = nums.Sum();
+            return expectedSum - actualSum;
         }
 
 
@@ -612,6 +611,25 @@ The majority element is the element that appears more than ⌊n / 2⌋ times. Yo
                 }
             }
             return Math.Max(longest, current.Length);
+        }
+
+
+        /* Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+Note that you must do this in-place without making a copy of the array.*/
+        public void MoveZeroes(int[] nums)
+        {
+            var zeroIndex = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] != 0)
+                {
+                    int temp = nums[zeroIndex];
+                    nums[zeroIndex] = nums[i];
+                    nums[i] = temp;
+                    zeroIndex++;
+                }
+            }
         }
     }
 }
