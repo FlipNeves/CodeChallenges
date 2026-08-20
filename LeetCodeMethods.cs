@@ -631,5 +631,90 @@ Note that you must do this in-place without making a copy of the array.*/
                 }
             }
         }
-    }
+
+
+        /* Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+         */
+        //I've tried to make it without help and following my first idea but I need to assume LeetCode tests made me crazy. haha
+        //I'll let it here just to 'Historical analyze'. I've stopped on scenario [1,2,2,2,1].
+        //(It's impossible to understand where and when we're in the middle of the list;
+        public bool IsPalindromeFailingOnTest(ListNode head) 
+        {
+            if (head == null || head.next == null)
+                return true;
+
+            var values = new List<int>();
+            int pos = -1;
+            bool isPalindrome = false;
+
+            while (head != null)
+            {
+                if (values.Count > 0)
+                {
+                    if (pos >= 0)
+                    {
+                        if(head.val == values[pos])
+                        {
+                            pos--;
+                            if (pos == -1)
+                                isPalindrome = true;
+                        }
+                        else
+                        {
+                            pos = -1;
+                            isPalindrome = false;
+                        }
+                    }
+                    else if (pos == -1)
+                    {
+                        if (head.val == values[values.Count - 1])
+                        {
+                            pos = values.Count - 2;
+                            isPalindrome = (pos == -1);
+                        }
+                        else if (values.Count > 1 && head.val == values[values.Count - 2])
+                        {
+                            pos = values.Count - 3;
+                            isPalindrome = (pos == -1);
+                        }
+                            else
+                                isPalindrome = false;
+                    }
+                }
+                values.Add(head.val);
+                head = head.next;
+            }
+            return isPalindrome && pos == -1;
+        }
+
+        public bool IsPalindrome(ListNode head)
+        {
+            if (head == null || head.next == null)
+                return true;
+            var values = new List<int>();
+            while (head != null)
+            {
+                values.Add(head.val);
+                head = head.next;
+            }
+
+            return values.SequenceEqual(values.AsEnumerable().Reverse());
+            //or
+            /*
+             *  int left = 0;
+            int right = values.Count - 1;
+            while (left<right)
+            {
+                if (values[left] != values[right])
+                    return false;
+                left++;
+                right--;
+            }
+            return true;
+            */
 }
+
+
+}
+}
+
