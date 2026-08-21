@@ -306,7 +306,7 @@ Every close bracket has a corresponding open bracket of the same type.
         public bool IsValid(string simbols)
         {
             Stack<char> stack = new Stack<char>();
-            
+
             foreach (var simbol in simbols)
             {
                 if (simbol == '(' || simbol == '[' || simbol == '{')
@@ -477,24 +477,24 @@ Two binary trees are considered the same if they are structurally identical, and
             if (p == null && q == null) return true;
             if (p == null || q == null) return false;
             if (p.val != q.val) return false;
-            
+
             var leftCheck = IsSameTree(p.left, q.left);
             var rightCheck = IsSameTree(p.right, q.right);
-            
+
             return leftCheck && rightCheck;
         }
 
         public int MaxDepth(TreeNode root)
         {
             if (root == null) return 0;
-            
+
             var maxDepth = 1;
             int leftMaxDepth = maxDepth, rightMaxDepth = maxDepth;
             if (root.left != null)
                 leftMaxDepth += MaxDepth(root.left);
             if (root.right != null)
                 rightMaxDepth += MaxDepth(root.right);
-            
+
             return Math.Max(leftMaxDepth, rightMaxDepth);
         }
 
@@ -537,7 +537,7 @@ Return the maximum profit you can achieve from this transaction. If you cannot a
 
         /* Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
          * */
-        public bool ContainsDuplicate(int[] nums) 
+        public bool ContainsDuplicate(int[] nums)
             => nums.Distinct().Count() != nums.Count();
 
 
@@ -638,7 +638,7 @@ Note that you must do this in-place without making a copy of the array.*/
         //I've tried to make it without help and following my first idea but I need to assume LeetCode tests made me crazy. haha
         //I'll let it here just to 'Historical analyze'. I've stopped on scenario [1,2,2,2,1].
         //(It's impossible to understand where and when we're in the middle of the list;
-        public bool IsPalindromeFailingOnTest(ListNode head) 
+        public bool IsPalindromeFailingOnTest(ListNode head)
         {
             if (head == null || head.next == null)
                 return true;
@@ -653,7 +653,7 @@ Note that you must do this in-place without making a copy of the array.*/
                 {
                     if (pos >= 0)
                     {
-                        if(head.val == values[pos])
+                        if (head.val == values[pos])
                         {
                             pos--;
                             if (pos == -1)
@@ -677,8 +677,8 @@ Note that you must do this in-place without making a copy of the array.*/
                             pos = values.Count - 3;
                             isPalindrome = (pos == -1);
                         }
-                            else
-                                isPalindrome = false;
+                        else
+                            isPalindrome = false;
                     }
                 }
                 values.Add(head.val);
@@ -712,7 +712,7 @@ Note that you must do this in-place without making a copy of the array.*/
             }
             return true;
             */
-}
+        }
 
 
 
@@ -736,6 +736,19 @@ Note that you must do this in-place without making a copy of the array.*/
         }
 
 
-}
+        public ListNode RemoveElements(ListNode head, int val)
+        {
+            var current = head;
+            var old = new ListNode();
+            var result = new ListNode();
+            while (current != null)
+            {
+                if (current.val != val)
+                    result.next = current;
+                current = current.next;
+            }
+            return head;
+        }
+    }
 }
 
