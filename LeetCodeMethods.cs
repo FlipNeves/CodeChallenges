@@ -715,6 +715,27 @@ Note that you must do this in-place without making a copy of the array.*/
 }
 
 
+
+        public ListNode ReverseList(ListNode head)
+        {
+            var listValues = new List<int>();
+            while (head != null)
+            {
+                listValues.Add(head.val);
+                head = head.next;
+            }
+
+            ListNode listNode = new ListNode();
+            var current = listNode;
+            for(int i = listValues.Count - 1; i>= 0; i--)
+            {
+                current.next = new ListNode(listValues[i]);
+                current = current.next;
+            }
+            return listNode.next;
+        }
+
+
 }
 }
 
