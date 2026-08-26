@@ -715,7 +715,6 @@ Note that you must do this in-place without making a copy of the array.*/
         }
 
 
-
         public ListNode ReverseList(ListNode head)
         {
             var listValues = new List<int>();
@@ -736,18 +735,40 @@ Note that you must do this in-place without making a copy of the array.*/
         }
 
 
+
+        /** Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.
+         * **/
         public ListNode RemoveElements(ListNode head, int val)
         {
-            var current = head;
-            var old = new ListNode();
-            var result = new ListNode();
-            while (current != null)
+            if (head == null)
+                return null;
+
+            ListNode list = new ListNode();
+            var current = list;
+            while(head != null)
             {
-                if (current.val != val)
-                    result.next = current;
-                current = current.next;
+                if (head.val != val)
+                {
+                    current.next = new ListNode(head.val);
+                    current = current.next;
+                }
+                head = head.next;
             }
-            return head;
+
+            return list.next;
+        }
+
+
+        /** Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+
+A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+        **/
+        public bool IsSubsequence(string s, string t)
+        {
+            
+
+
+            return false;
         }
     }
 }
