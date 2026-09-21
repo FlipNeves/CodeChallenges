@@ -786,6 +786,40 @@ A subsequence of a string is a new string that is formed from the original strin
             }
             return true;
         }
+
+        /* Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+         * */
+        public bool IsAnagram(string s, string t)
+        {
+            if (s.Length != t.Length)
+                return false;
+
+            var sKeyValuePair = s.ToArray().GroupBy(c => c).ToDictionary(g => g.Key, g => g.Count());
+            var tKeyValuePair = t.ToArray().GroupBy(c => c).ToDictionary(g => g.Key, g => g.Count());
+
+            foreach (var sValuePair in sKeyValuePair)
+            {
+                if (!tKeyValuePair.TryGetValue(sValuePair.Key, out var tValue) || sKeyValuePair[sValuePair.Key] != tValue)
+                    return false;
+            }
+            return true;
+        }
+
+        //Better solution, just thinking more about the problem and using a dictionary to count the letters.
+        public bool IsAnagram_2(string s, string t)
+        {
+            if (s.Length != t.Length)
+                return false;
+
+            var countLetters = new Dictionary<char, int>();
+            for (int i = 0; i < s.Length; i++)
+            {
+                countLetters[s[i]] = countLetters.GetValueOrDefault(s[i]) + 1;
+                countLetters[t[i]] = countLetters.GetValueOrDefault(t[i]) - 1;
+            }
+
+            return !countLetters.Any(x => x.Value != 0);
+        }
     }
 }
 
