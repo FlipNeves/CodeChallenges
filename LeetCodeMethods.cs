@@ -726,7 +726,7 @@ Note that you must do this in-place without making a copy of the array.*/
 
             ListNode listNode = new ListNode();
             var current = listNode;
-            for(int i = listValues.Count - 1; i>= 0; i--)
+            for (int i = listValues.Count - 1; i >= 0; i--)
             {
                 current.next = new ListNode(listValues[i]);
                 current = current.next;
@@ -745,7 +745,7 @@ Note that you must do this in-place without making a copy of the array.*/
 
             ListNode list = new ListNode();
             var current = list;
-            while(head != null)
+            while (head != null)
             {
                 if (head.val != val)
                 {
@@ -765,10 +765,26 @@ A subsequence of a string is a new string that is formed from the original strin
         **/
         public bool IsSubsequence(string s, string t)
         {
-            
-
-
-            return false;
+            if (t.Length == 0 && s.Length == 0) return true;
+            if (t.Length == 0) return false;
+            if (s.Length == t.Length && s != t) return false;
+            int tIndex = 0, sIndex = 0;
+            for (int i = sIndex; i < s.Length; i++)
+            {
+                var sLetter = s[i];
+                for (int j = tIndex; j < t.Length; j++)
+                {
+                    var tLetter = t[j];
+                    if (s.Contains(tLetter) && tLetter != sLetter)
+                        return false;
+                    else if (tLetter == sLetter)
+                    {
+                        tIndex = j + 1;
+                        break;
+                    }
+                }
+            }
+            return true;
         }
     }
 }
