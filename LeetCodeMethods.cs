@@ -820,6 +820,20 @@ A subsequence of a string is a new string that is formed from the original strin
 
             return !countLetters.Any(x => x.Value != 0);
         }
+
+        /* Given an array nums of n integers where nums[i] is in the range [1, n], return an array of all the integers in the range [1, n] that do not appear in nums.
+         * */
+        public IList<int> FindDisappearedNumbers(int[] nums)
+        {
+            var hashSet = new HashSet<int>(nums);
+            var result = new List<int>();
+            for (int i = 1; i <= nums.Length; i++)
+            {
+                if (!hashSet.Contains(i))
+                    result.Add(i);
+            }
+            return result;
+        }
     }
 }
 
