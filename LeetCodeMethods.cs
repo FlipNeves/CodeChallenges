@@ -834,6 +834,93 @@ A subsequence of a string is a new string that is formed from the original strin
             }
             return result;
         }
+
+
+        /* You are given an integer array nums consisting of n elements, and an integer k.
+
+Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.
+        */
+        public double FindMaxAverage(int[] nums, int k)
+        {
+            var maxAverage = double.MinValue;
+            var bestNumsToAverage = new List<int>();
+            foreach (int i in nums)
+            {
+                if (bestNumsToAverage.Count < k)
+                {
+                    bestNumsToAverage.Add(i);
+                    maxAverage = bestNumsToAverage.Average();
+                }
+                else
+                {
+                    bestNumsToAverage.RemoveAt(0);
+                    bestNumsToAverage.Add(i);
+                    var currentAverage = bestNumsToAverage.Average();
+                    if (currentAverage > maxAverage)
+                    {
+                        maxAverage = currentAverage;
+                    }
+                }
+            }
+            return maxAverage;
+        }
+        
+        public double FindMaxAverage_2(int[] nums, int k)
+        {
+            var maxAverage = double.MinValue;
+            var bestSumToAverage = 0d;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                bestSumToAverage += nums[i];
+                if (i > k - 1)
+                    bestSumToAverage -= nums[i - k];
+                
+                if (i >= k - 1)
+                {
+                    double currentAverage = (double)bestSumToAverage / k;
+                    maxAverage = Math.Max(currentAverage, maxAverage);
+                }
+            }
+            return maxAverage;
+        }
+
+        public double FindMaxAverage_3(int[] nums, int k)
+        {
+            var maxSum = double.MinValue;
+            var bestSumToAverage = 0d;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                bestSumToAverage += nums[i];
+                if (i < k - 1)
+                    continue;
+
+                if (i > k - 1)
+                    bestSumToAverage -= nums[i - k];
+
+                if (i >= k -1)
+                    maxSum = Math.Max(bestSumToAverage, maxSum);
+            }
+            return (double)maxSum / k;
+        }
+
+        public double FindMaxAverage_4(int[] nums, int k)
+        {
+            var currentSum = 0d;
+            for (int i = 0; i < k; i++)
+                currentSum += nums[i];
+            
+            var maxSum = currentSum;
+            for (int i = k; i < nums.Length; i++)
+            {
+
+                currentSum += nums[i] - nums[i - k];
+                if (currentSum > maxSum)
+                    maxSum = currentSum;
+            }
+            return (double)maxSum / k;
+        }
+
     }
 }
 
