@@ -1030,7 +1030,6 @@ Note that after backspacing an empty text, the text will continue empty.
             }
             return true;
         }
-
         private static int ClosestValidIndex(string w, int wIndex)
         {
             int wSkip = 0;
