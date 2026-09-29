@@ -10,7 +10,7 @@ Console.WriteLine("Hello, Challenge War!");
 //ListNode listNode = new ListNode(1, new ListNode(0, new ListNode(0, null)));
 
 
-var val = _LeetCodeMethods.Search([-1, 0, 3, 5, 9, 12], 13);
+var val = _LeetCodeMethods.BackspaceCompare_3("ab##", "c#d#");
 //var val = _LeetCodeMethods.IsSubsequence("b", "c");
 Console.WriteLine(string.Join(",", val));
 
