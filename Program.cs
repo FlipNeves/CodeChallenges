@@ -1,6 +1,5 @@
 ﻿using CodeChallenges;
 using CodeWars;
-using static CodeWars.LeetCodeMethods;
 
 var _LeetCodeMethods = new LeetCodeMethods();
 var _ConsoleMethods = new ConsoleMethods();
@@ -11,7 +10,7 @@ Console.WriteLine("Hello, Challenge War!");
 //ListNode listNode = new ListNode(1, new ListNode(0, new ListNode(0, null)));
 
 
-var val = _LeetCodeMethods.FindMaxAverage_4([1, 12, -5, -6, 50, 3], 4);
+var val = _LeetCodeMethods.Search([-1, 0, 3, 5, 9, 12], 13);
 //var val = _LeetCodeMethods.IsSubsequence("b", "c");
 Console.WriteLine(string.Join(",", val));
 
