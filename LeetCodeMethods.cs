@@ -864,7 +864,7 @@ Find a contiguous subarray whose length is equal to k that has the maximum avera
             }
             return maxAverage;
         }
-        
+
         public double FindMaxAverage_2(int[] nums, int k)
         {
             var maxAverage = double.MinValue;
@@ -875,7 +875,7 @@ Find a contiguous subarray whose length is equal to k that has the maximum avera
                 bestSumToAverage += nums[i];
                 if (i > k - 1)
                     bestSumToAverage -= nums[i - k];
-                
+
                 if (i >= k - 1)
                 {
                     double currentAverage = (double)bestSumToAverage / k;
@@ -898,7 +898,7 @@ Find a contiguous subarray whose length is equal to k that has the maximum avera
                 if (i > k - 1)
                     bestSumToAverage -= nums[i - k];
 
-                if (i >= k -1)
+                if (i >= k - 1)
                     maxSum = Math.Max(bestSumToAverage, maxSum);
             }
             return (double)maxSum / k;
@@ -909,7 +909,7 @@ Find a contiguous subarray whose length is equal to k that has the maximum avera
             var currentSum = 0d;
             for (int i = 0; i < k; i++)
                 currentSum += nums[i];
-            
+
             var maxSum = currentSum;
             for (int i = k; i < nums.Length; i++)
             {
@@ -963,6 +963,84 @@ Return the smallest character in letters that is lexicographically greater than 
                     right = mid - 1;
             }
             return -1;
+        }
+
+
+        /**Given two strings s and t, return true if they are equal when both are typed into empty text editors. '#' means a backspace character.
+
+Note that after backspacing an empty text, the text will continue empty.
+        **/
+        public bool BackspaceCompare(string s, string t) //Solved
+        {
+            var sStack = new Stack<char>();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == '#')
+                    if (sStack.Count() >= 1) sStack.Pop();
+                    else continue;
+                else
+                    sStack.Push(s[i]);
+            }
+            var tStack = new Stack<char>();
+            for (int i = 0; i < t.Length; i++)
+            {
+                if (t[i] == '#')
+                    if (tStack.Count() >= 1) tStack.Pop();
+                    else continue;
+                else
+                    tStack.Push(t[i]);
+            }
+            return sStack.SequenceEqual(tStack);
+        }
+
+        public bool BackspaceCompare_2(string s, string t) //Best performance beating 100% of C# submissions on LeetCode
+        {
+            while (s.Contains('#') || t.Contains('#'))
+            {
+                s = RemoveBackspace(s);
+                t = RemoveBackspace(t);
+            };
+            return s == t;
+        }
+        public string RemoveBackspace(string w)
+        {
+            var index = w.IndexOf('#');
+            if (index == -1) return w;
+            if (index == 0)
+                return w[1..];
+            else
+                return w.Remove(index - 1, 2);
+        }
+
+        public bool BackspaceCompare_3(string s, string t) //Best performance beating 100% and beating 90% of memory usage of C# submissions on LeetCode
+        {
+            int sIndex = s.Length - 1, tIndex = t.Length - 1;
+            while (sIndex >= 0 || tIndex >= 0)
+            {
+                sIndex = ClosestValidIndex(s, sIndex);
+                tIndex = ClosestValidIndex(t, tIndex);
+                
+                if ((sIndex >= 0) && (tIndex >= 0))
+                    if (s[sIndex] != t[tIndex]) return false; 
+
+                if ((sIndex >= 0) != (tIndex >= 0))
+                    return false;
+
+                sIndex--; tIndex--;
+            }
+            return true;
+        }
+
+        private static int ClosestValidIndex(string w, int wIndex)
+        {
+            int wSkip = 0;
+            while (wIndex >= 0)
+            {
+                if (w[wIndex] == '#') { wSkip++; wIndex--; }
+                else if (wSkip > 0) { wSkip--; wIndex--; }
+                else break;
+            }
+            return wIndex;
         }
     }
 }
