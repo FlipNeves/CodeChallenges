@@ -933,6 +933,37 @@ Return the smallest character in letters that is lexicographically greater than 
 
             return letters[0];
         }
+
+
+        public int Search_O_n_Solution(int[] nums, int target)
+        {
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == target) return i;
+            }
+            return -1;
+        }
+
+        public int Search(int[] nums, int target)
+        {
+            if (target > nums[nums.Length - 1] || target < nums[0])
+                return -1;
+
+            int left = 0;
+            int right = nums.Length - 1;
+            int mid = 0;
+            while (left <= right)
+            {
+                mid = left + ((right - left) / 2);
+                if (nums[mid] == target)
+                    return mid;
+                if (nums[mid] < target)
+                    left = mid + 1;
+                if (nums[mid] > target)
+                    right = mid - 1;
+            }
+            return -1;
+        }
     }
 }
 
