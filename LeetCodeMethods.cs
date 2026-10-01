@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text;
 
 namespace CodeWars
 {
@@ -1040,6 +1041,92 @@ Note that after backspacing an empty text, the text will continue empty.
                 else break;
             }
             return wIndex;
+        }
+
+
+        /**You are given the root of a binary tree.
+
+Return all root-to-leaf paths in any order.
+
+A leaf is a node with no children.
+
+        **/
+        public IList<string> BinaryTreePaths(TreeNode root)
+        {
+            var result = new List<string>();
+            if (root == null) return result;
+            if (root.left == null && root.right == null) return new List<string> { root.val.ToString() };
+
+            if (root.left != null)
+            {
+                var leftPaths = BinaryTreePaths(root.left);
+                if (leftPaths.Count > 0)
+                {
+                    foreach (var path in leftPaths)
+                        result.Add(root.val.ToString() + "->" + path);
+                }
+            }
+            if (root.right != null)
+            {
+                var rightPaths = BinaryTreePaths(root.right);
+                if (rightPaths.Count > 0)
+                {
+                    foreach (var path in rightPaths)
+                        result.Add(root.val.ToString() + "->" + path);
+                }
+            }
+
+            return result;
+        }
+
+        public IList<string> BinaryTreePaths_2(TreeNode root)
+        {
+            var result = new List<string>();
+            DFS(root, "", result);
+            return result;
+        }
+        
+        private void DFS(TreeNode node, string path, IList<string> result)
+        {
+            if (node == null) return;
+
+            path += node.val.ToString();
+            if (node.left == null && node.right == null)
+            {
+                result.Add(path);
+                return;
+            }
+
+            DFS(node.left, path + "->", result);
+            DFS(node.right, path + "->", result);
+        }
+
+        public IList<string> BinaryTreePaths_3(TreeNode root)
+        {
+            var result = new List<string>();
+            var sb = new StringBuilder();
+            DFS_2(root, sb, result);
+            return result;
+        }
+
+        private void DFS_2(TreeNode node, StringBuilder path, IList<string> result)
+        {
+            if (node == null) return;
+            
+            var originalLength = path.Length;
+            path.Append(node.val);
+
+            if (node.left == null && node.right == null)
+                result.Add(path.ToString());
+            else
+                path.Append("->");
+
+            if (node.left != null)
+                DFS_2(node.left, path, result);
+            if (node.right != null)
+                DFS_2(node.right, path, result);
+            
+            path.Length = originalLength;
         }
     }
 }
