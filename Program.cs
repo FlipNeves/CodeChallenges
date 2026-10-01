@@ -1,5 +1,6 @@
 ﻿using CodeChallenges;
 using CodeWars;
+using static CodeWars.LeetCodeMethods;
 
 var _LeetCodeMethods = new LeetCodeMethods();
 var _ConsoleMethods = new ConsoleMethods();
@@ -10,7 +11,7 @@ Console.WriteLine("Hello, Challenge War!");
 //ListNode listNode = new ListNode(1, new ListNode(0, new ListNode(0, null)));
 
 
-var val = _LeetCodeMethods.BackspaceCompare_3("ab##", "c#d#");
+var val = _LeetCodeMethods.BinaryTreePaths(new TreeNode(1, new TreeNode(2, null, new TreeNode(5)), new TreeNode(3)));
 //var val = _LeetCodeMethods.IsSubsequence("b", "c");
 Console.WriteLine(string.Join(",", val));
 
