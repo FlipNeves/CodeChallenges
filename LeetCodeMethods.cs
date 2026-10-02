@@ -1000,7 +1000,8 @@ Note that after backspacing an empty text, the text will continue empty.
             {
                 s = RemoveBackspace(s);
                 t = RemoveBackspace(t);
-            };
+            }
+            ;
             return s == t;
         }
         public string RemoveBackspace(string w)
@@ -1020,9 +1021,9 @@ Note that after backspacing an empty text, the text will continue empty.
             {
                 sIndex = ClosestValidIndex(s, sIndex);
                 tIndex = ClosestValidIndex(t, tIndex);
-                
+
                 if ((sIndex >= 0) && (tIndex >= 0))
-                    if (s[sIndex] != t[tIndex]) return false; 
+                    if (s[sIndex] != t[tIndex]) return false;
 
                 if ((sIndex >= 0) != (tIndex >= 0))
                     return false;
@@ -1085,7 +1086,7 @@ A leaf is a node with no children.
             DFS(root, "", result);
             return result;
         }
-        
+
         private void DFS(TreeNode node, string path, IList<string> result)
         {
             if (node == null) return;
@@ -1112,7 +1113,7 @@ A leaf is a node with no children.
         private void DFS_2(TreeNode node, StringBuilder path, IList<string> result)
         {
             if (node == null) return;
-            
+
             var originalLength = path.Length;
             path.Append(node.val);
 
@@ -1125,8 +1126,27 @@ A leaf is a node with no children.
                 DFS_2(node.left, path, result);
             if (node.right != null)
                 DFS_2(node.right, path, result);
-            
+
             path.Length = originalLength;
+        }
+
+
+        /**Given the head of a singly linked list, return the middle node of the linked list.
+
+If there are two middle nodes, return the second middle node.
+        **/
+        public ListNode MiddleNode(ListNode head)
+        {
+            if (head?.val == null) return null;
+
+            var slow = head;
+            var fast = head;
+            while (fast?.next != null)
+            {
+                slow = slow.next;
+                fast = fast.next?.next;
+            }
+            return slow;
         }
     }
 }
