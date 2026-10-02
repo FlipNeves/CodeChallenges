@@ -1148,6 +1148,21 @@ If there are two middle nodes, return the second middle node.
             }
             return slow;
         }
+
+
+        /**Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+         * **/
+        public int[] SortedSquares(int[] nums)
+        {
+            var result = new int[nums.Count()];
+            int i = 0;
+            foreach (var num in nums)
+            {
+                result[i] = num * num;
+                i++;
+            }
+            return result.OrderBy(x => x).ToArray();
+        }
     }
 }
 
