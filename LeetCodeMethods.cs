@@ -1214,7 +1214,7 @@ numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
                 val = nums;
                 prefix = new int[nums.Length];
                 prefix[0] = nums[0];
-                for (int i = 1; i <= nums.Length; i++)
+                for (int i = 1; i < nums.Length; i++)
                     prefix[i] = prefix[i-1] + nums[i];
             }
 
