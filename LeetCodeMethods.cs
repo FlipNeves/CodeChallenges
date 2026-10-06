@@ -1164,6 +1164,24 @@ If there are two middle nodes, return the second middle node.
             return result.OrderBy(x => x).ToArray();
         }
 
+        public int[] SortedSquares_2(int[] nums)//Using two pointers
+        {
+            int i = nums.Length;
+            var result = new int[i];
+            var left = 0;
+            var right = i - 1;
+            while(left <= right)
+            {
+                var bigger = nums[right] > nums[left] * -1 ? nums[right] : nums[left] * -1;
+                result[--i] = bigger * bigger;
+                if (bigger == nums[right])
+                    right--;
+                else
+                    left++;
+            }
+            return result;
+        }
+
 
         /** Given an integer array nums, handle multiple queries of the following type:
 
