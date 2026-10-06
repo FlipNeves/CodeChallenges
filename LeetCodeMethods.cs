@@ -1204,7 +1204,23 @@ numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
             }
         }
 
-       
+        public class NumArray
+        {
+            public int[] val;
+            public int[] prefix;
+
+            public NumArray(int[] nums)
+            {
+                val = nums;
+                prefix = new int[nums.Length];
+                prefix[0] = nums[0];
+                for (int i = 1; i <= nums.Length; i++)
+                    prefix[i] = prefix[i-1] + nums[i];
+            }
+
+            public int SumRange(int left, int right) 
+                => prefix[right] - ((left == 0) ? 0 : prefix[left - 1]);
+        }
     }
 }
 
