@@ -11,7 +11,7 @@ Console.WriteLine("Hello, Challenge War!");
 //ListNode listNode = new ListNode(1, new ListNode(0, new ListNode(0, null)));
 
 
-var val = _LeetCodeMethods.BinaryTreePaths(new TreeNode(1, new TreeNode(2, null, new TreeNode(5)), new TreeNode(3)));
+var val = _LeetCodeMethods.SortedSquares_2([-7, -3, 2, 3, 11]);
 //var val = _LeetCodeMethods.IsSubsequence("b", "c");
 Console.WriteLine(string.Join(",", val));
 
