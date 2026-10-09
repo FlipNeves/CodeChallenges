@@ -1239,6 +1239,61 @@ numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
             public int SumRange(int left, int right) 
                 => prefix[right] - ((left == 0) ? 0 : prefix[left - 1]);
         }
+
+
+        /** Given the roots of two binary trees root and subRoot, return true if there is a subtree of root with the same structure and node values of subRoot and false otherwise.
+
+A subtree of a binary tree tree is a tree that consists of a node in tree and all of this node's descendants. The tree tree could also be considered as a subtree of itself.
+        **/
+        public bool IsSubtree(TreeNode root, TreeNode subRoot) //Based on what I did on IsSameTree challenge
+        {
+            if (root == null) return false;
+            if (IsSameTree_for_IsSubtree(root, subRoot)) return true;
+
+            return IsSubtree(root.left, subRoot) || IsSubtree(root.right, subRoot);
+        }
+
+        private bool IsSameTree_for_IsSubtree(TreeNode root, TreeNode subRoot)
+        {
+            if (root == null && subRoot == null) return true;
+            if (root == null || subRoot == null) return false;
+            if (root.val != subRoot.val) return false;
+            
+            return IsSameTree_for_IsSubtree(root.left, subRoot.left) 
+                && IsSameTree_for_IsSubtree(root.right, subRoot.right);
+        }
+
+        public bool IsSubtree_2(TreeNode root, TreeNode subRoot)//Best memory solution
+        {
+            if (root == null) return false;
+            var sb = new StringBuilder();
+                sb.Append("," + root.val);
+            
+            BuildString(root.left, sb);
+            BuildString(root.right, sb);
+
+            var subSb = new StringBuilder();
+                subSb.Append("," + subRoot.val);
+
+            BuildString(subRoot.left, subSb);
+            BuildString(subRoot.right, subSb);
+
+            return sb.ToString().Contains(subSb.ToString());
+        }
+
+        private void BuildString(TreeNode node, StringBuilder sb)
+        {
+            if (node == null)
+            {
+                sb.Append(",#");
+                return;
+            }
+            else sb.Append("," + node.val);
+            
+            BuildString(node.left, sb);
+            BuildString(node.right, sb);
+        }
+
     }
 }
 
